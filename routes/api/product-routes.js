@@ -26,7 +26,7 @@ router.get("/:id", async (req, res) => {
 
     if (!productData) {
       res.status(404).json({
-        message: "We couldn't find that category, please try another!",
+        message: "We couldn't find that product, please try another!",
       });
       return;
     }
@@ -46,17 +46,13 @@ router.post("/", async (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
-  try {
-    const newProduct = await Product.create({
-      product_name: req.body.product_name,
-      price: req.body.price,
-      stock: req.body.stock,
-      tagIds: req.body.tagIds,
-    });
-    res.status(200).json(newProduct);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+  // const newProduct = await Product.create({
+  //   product_name: req.body.product_name,
+  //   price: req.body.price,
+  //   stock: req.body.stock,
+  //   tagIds: req.body.tagIds,
+  // });
+  // res.status(200).json(newProduct);
   Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -70,12 +66,12 @@ router.post("/", async (req, res) => {
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
-      res.status(200).json(product);
+      return res.status(200).json(product);
     })
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
       console.log(err);
-      res.status(400).json(err);
+      return res.status(400).json(err);
     });
 });
 
