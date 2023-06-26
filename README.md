@@ -14,8 +14,7 @@ This API combines NodeJS and MySQL to create a functional backend to be implemen
 2. [Usage](#usage)
 3. [License](#license)
 4. [Contributors](#contributors)
-5. [Tests](#tests)
-6. [Questions](#questions)
+5. [Questions](#questions)
 
 ## Installation
 
